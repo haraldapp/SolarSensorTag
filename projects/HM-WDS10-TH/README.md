@@ -29,7 +29,7 @@ Verbindungen an die Leiterplatte anlöten und alles ins Gehäuse einpassen.
 
 ## Bedienung
 - Die Bedieung erfolt über den Taster. Anders als bei bei Standard Homematic Sensoren ist ein Menü implementiert über das mehrere Funktionen auswählbar sind.  
-   [siehe doc](../source/doc/menu-states.jpg)
+   [siehe doc](/source/doc/menu-states.jpg)
 
 
 ## Lizenz

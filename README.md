@@ -23,7 +23,7 @@ Status: erste Prototypen als Temperatur+Luftfeuchte Sensor laufen seit 08/2022
   ![](pictures/aufbau.jpg) 
  
 ## Software
-- Entwicklungsumgebung Silikon Labs Simplicity Studio mit GeckoSDK
+- Entwicklungsumgebung Silicon Labs Simplicity Studio mit GeckoSDK
 - Unfangreiches eigenes API mit Arduino ähnlichen Funktionen, das auf dem SiLabs GeckoSDK aufsetzt  
   (damit sind Sourcecode Teile aus Arduino Sketches einsetzbar)
 - Watchdog
