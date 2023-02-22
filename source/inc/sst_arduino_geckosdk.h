@@ -952,7 +952,7 @@ enum { SST_BUTTONMENU_END=0,
      SST_BUTTONMENU_RADIOPOWER_LOW, SST_BUTTONMENU_RADIOPOWER_NORMAL, SST_BUTTONMENU_RADIOPOWER_HIGH, \
      SST_BUTTONMENU_GOTO|SST_BUTTONMENU_RADIOPOWER_LOW, \
     }
-template <class DEVTYPE,class TBUTTONBASE,class LEDSTATES>  // TBUTTONBASE eg. StateButton<OFFSTATE,ONSTATE,MODE>
+template <class DEVTYPE,class TBUTTONBASE,class LEDSTATES,const uint8_t version1,const uint8_t version2>  // TBUTTONBASE eg. StateButton<OFFSTATE,ONSTATE,MODE>
 class SSTMenuButton : public TBUTTONBASE {
   DEVTYPE& m_device;
   const uint8_t *m_pmenudef;
@@ -1032,7 +1032,7 @@ public:
       case SST_BUTTONMENU_SWITCHOFF: m_signal=sst_ledmode_signal_ok; m_action=SST_MB_ACTION_SWITCHOFF; break;
       case SST_BUTTONMENU_MODENORMAL: SSTSetRunMode(SST_RUNMODE_NORMAL); m_signal=sst_ledmode_signal_ok; m_action=SST_MB_ACTION_MEASURE; break;
       case SST_BUTTONMENU_MODEDEBUGVBAT: SSTSetRunMode(SST_RUNMODE_DEBUG_VBAT); m_signal=sst_ledmode_signal_ok; m_action=SST_MB_ACTION_MEASURE; break;
-      case SST_BUTTONMENU_SHOWVERSION: m_signal=showVersion();  break;
+      case SST_BUTTONMENU_SHOWVERSION: m_signal=showVersion(version1,version2);  break;
       case SST_BUTTONMENU_RADIOPOWER_LOW:
       case SST_BUTTONMENU_RADIOPOWER_NORMAL:
       case SST_BUTTONMENU_RADIOPOWER_HIGH: setRadioPowerMenu(menuitem); m_signal=sst_ledmode_signal_ok; break;
@@ -1060,11 +1060,11 @@ public:
   }
   virtual void measure() {
   }
-  SSTLedModeEx showVersion() {
+  SSTLedModeEx showVersion(const uint8_t ver1, const uint8_t ver2) {
     m_device.led().setEx(sst_ledmode_off); m_device.led().ledOff();
     Delay(500);
     for ( uint8_t sub=0; sub<2; sub++ ) {
-      uint8_t ver=(sub==0)?SST_ARDUINO_GECKOSDK_MAJOR:SST_ARDUINO_GECKOSDK_MINOR;
+      uint8_t ver=(sub==0)?ver1:ver2;
       for ( uint8_t nr=0; nr<ver; nr++ ) {
         m_device.led().ledOnEx(); Delay(150);
         m_device.led().ledOff(); Delay(250);
@@ -1321,12 +1321,12 @@ public:
   size_t print( const char *str )  { return 0; }
   // size_t print(const char[] ac )  {}
   size_t print(char c) { return 0; }
-  size_t print(unsigned char c, int t=DEC ) { return 0; }
-  size_t print(short s, int t=DEC) { return 0; }
-  size_t print(unsigned short s, int t=DEC) { return 0; }
-  size_t print(long l, int t=DEC)	{ return 0; }
-  size_t print(unsigned long u, int t=DEC) { return 0; }
-  size_t print( int i, int t=DEC)	{ return 0; }
+  size_t print(unsigned char c, int t=0 ) { return 0; }
+  size_t print(short s, int t=0) { return 0; }
+  size_t print(unsigned short s, int t=0) { return 0; }
+  size_t print(long l, int t=0)	{ return 0; }
+  size_t print(unsigned long u, int t=0) { return 0; }
+  size_t print( int i, int t=0)	{ return 0; }
   // size_t print(double, int = 2);
 };
 extern SST_SWODebugSerial _SST_SWODebugSerial;

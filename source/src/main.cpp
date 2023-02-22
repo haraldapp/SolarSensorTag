@@ -21,6 +21,10 @@
 #error "no global define SST_CONFIG_FILE"
 #endif
 
+// Version
+#define SST_VER_MAJOR 1
+#define SST_VER_MINOR 2
+
 // TODO implement asksin option wake up on radio
 // TODO implement asksin AES using EFM32 hardware
 // TODO implement SST option battery monitor
@@ -398,10 +402,11 @@ const uint8_t cfgBtnMenu[]=SST_BUTTONMENU_THSENSOR_DEVELOP;
 #else
 const uint8_t cfgBtnMenu[]=SST_BUTTONMENU_THSENSOR;
 #endif
-typedef SSTMenuButton<SSTDevice,StateButton<>,LedStates> SSTButtonType;
+#define CFGBTNMENUSZE (sizeof(cfgBtnMenu)/sizeof(uint8_t))
+typedef SSTMenuButton<SSTDevice,StateButton<>,LedStates,SST_VER_MAJOR,SST_VER_MINOR> SSTButtonType;
 class SSTButton : public SSTButtonType {
 public:
-  SSTButton() : SSTButtonType(sdev,cfgBtnMenu,sizeof(cfgBtnMenu)/sizeof(uint8_t),seconds2ticks(2)) {
+  SSTButton() : SSTButtonType(sdev,cfgBtnMenu,CFGBTNMENUSZE,seconds2ticks(2)) {
   };
   virtual void measure() {
     #if DEVICE_TYPE == THSensor

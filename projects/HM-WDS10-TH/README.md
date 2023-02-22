@@ -3,7 +3,7 @@ Temperatur+Luftfeuchte Sensor for Homematic
 
 ## Bauteile
 - die STT Leiterplatte wird mit wenigen Bauteilen bestückt  
-  Bestückungsliste
+  Bestückungsliste [``PDF``](SolarSensorTag-THSensor-Parts.pdf)
 - zum Einsatz kommt ein VL2020/HFN Akku mit Lötfahnen der direkt auf der Leiterplatte bestückt wird  
 
 ## Aufbau
